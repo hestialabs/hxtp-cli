@@ -1,0 +1,9 @@
+version: 1
+env:
+  - CGO_ENABLED=0
+goos: linux
+goarch: amd64
+main: ./cmd/hxtp-cli
+binary: hxtp-cli-{{ .Os }}-{{ .Arch }}
+ldflags:
+  - -s -w
