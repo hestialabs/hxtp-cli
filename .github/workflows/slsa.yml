@@ -11,6 +11,9 @@ on:
 
 permissions: read-all
 
+env:
+  GOWORK: off
+
 jobs:
   build:
     permissions:
@@ -18,6 +21,7 @@ jobs:
       contents: write # To upload assets to release.
       actions: read   # To read the workflow path.
     strategy:
+      fail-fast: false
       matrix:
         os:
           - linux
@@ -32,3 +36,4 @@ jobs:
       config-file: .slsa-goreleaser/${{ matrix.os }}-${{ matrix.arch }}.yml
       upload-assets: true
       compile-builder: true
+      go-mod-vendor: false
