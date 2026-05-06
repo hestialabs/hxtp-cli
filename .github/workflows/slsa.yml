@@ -11,7 +11,7 @@
 # The provenance file can be verified using https://github.com/slsa-framework/slsa-verifier.
 # For more information about SLSA and how it improves the supply-chain, visit slsa.dev.
 
-name: SLSA Go releaser
+name: SLSA Go
 on:
   workflow_dispatch:
   push:
@@ -35,7 +35,8 @@ jobs:
     uses: slsa-framework/slsa-github-generator/.github/workflows/builder_go_slsa3.yml@v1.9.0
     with:
       go-version: 1.24
-      releaser-config-path: .slsa-goreleaser.yml
+      config-file: .slsa-goreleaser.yml
+      upload-assets: true
       # =============================================================================================================
       #     Optional: For more options, see https://github.com/slsa-framework/slsa-github-generator#golang-projects
       # =============================================================================================================
