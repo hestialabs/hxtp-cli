@@ -4,10 +4,5 @@ builds:
     binary: hxtp-cli
     goos:
       - linux
-      - windows
-      - darwin
     goarch:
       - amd64
-      - arm64
-    ldflags:
-      - -s -w
