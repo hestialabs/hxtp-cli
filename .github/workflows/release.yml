@@ -24,17 +24,17 @@ jobs:
           go-version: '1.24'
 
       - name: Install dependencies
-        working-directory: cli/hxtp-cli
+        working-directory: .
         run: go mod download
 
       - name: Build binaries
-        working-directory: cli/hxtp-cli
+        working-directory: .
         run: |
           chmod +x build.sh
           ./build.sh
 
       - name: Generate Manifest
-        working-directory: cli/hxtp-cli
+        working-directory: .
         run: |
           VERSION=${GITHUB_REF#refs/tags/v}
           cat <<EOF > dist/manifest.json
@@ -50,9 +50,9 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            cli/hxtp-cli/dist/*.tar.gz
-            cli/hxtp-cli/dist/*.zip
-            cli/hxtp-cli/dist/manifest.json
+            dist/*.tar.gz
+            dist/*.zip
+            dist/manifest.json
           draft: false
           prerelease: false
           generate_release_notes: true
