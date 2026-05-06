@@ -1,3 +1,4 @@
+// version v1.0.0
 module github.com/hestialabs/hxtp-cli
 
 go 1.24.4
