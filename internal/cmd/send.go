@@ -53,7 +53,7 @@ var sendCmd = &cobra.Command{
 				broker = envBroker
 			}
 			
-			mqttTransport := transport.NewMQTTTransport(broker, "hxtpctl-"+cfg.ClientId, "", "")
+			mqttTransport := transport.NewMQTTTransport(broker, "hxtp-cli-"+cfg.ClientId, "", "")
 			err = mqttTransport.Connect(cmd.Context())
 			if err != nil {
 				return fmt.Errorf("MQTT_CONNECT_ERROR: %w", err)
@@ -83,7 +83,7 @@ var sendCmd = &cobra.Command{
 			fmt.Println(theme.WarningMsg.Render("⚠️  SAFETY GATE TRIGGERED"))
 			fmt.Printf("This action requires a second confirmation. Dry-run results look stable.\n")
 			fmt.Printf("To finalize this action, run:\n\n")
-			fmt.Printf("   %s\n\n", fmt.Sprintf("hxtp confirm %s --device-id %s", dryRunToken, deviceId))
+			fmt.Printf("   %s\n\n", fmt.Sprintf("hxtp-cli confirm %s --device-id %s", dryRunToken, deviceId))
 		} else {
 			fmt.Printf("%s\n", theme.SuccessMsg.Render("Command successfully sent to device!"))
 		}

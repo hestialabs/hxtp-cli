@@ -73,7 +73,7 @@ func LoadConfig() (*Config, error) {
 func RequireAuth() (string, *Config, error) {
 	token, err := GetToken()
 	if err != nil {
-		return "", nil, fmt.Errorf("Not authenticated. Run 'hxtpctl login'")
+		return "", nil, fmt.Errorf("Not authenticated. Run 'hxtp-cli login'")
 	}
 	cfg, _ := LoadConfig()
 	return token, cfg, nil
