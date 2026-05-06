@@ -1,14 +1,13 @@
 version: 1
 builds:
-  - id: hxtp-cli
-    main: ./cmd/hxtp-cli
+  - main: ./cmd/hxtp-cli
     binary: hxtp-cli
     goos:
       - linux
-      - darwin
       - windows
+      - darwin
     goarch:
       - amd64
       - arm64
     ldflags:
-      - -s -w -X main.version={{.Version}}
+      - -s -w
