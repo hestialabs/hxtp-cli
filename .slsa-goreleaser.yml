@@ -1,14 +1,13 @@
-# SLSA3 GoReleaser configuration for HxTP CLI
-# Single multi-target build — produces all platform binaries in one job.
-# See: https://github.com/slsa-framework/slsa-github-generator/blob/main/internal/builders/go/README.md
-
 version: 1
 
 builds:
-  - id: hxtp-cli
-    binary: hxtp-cli
-    main: ./cmd/hxtp-cli
-    env:
-      - CGO_ENABLED=0
-    goos: [linux, darwin, windows]
-    goarch: [amd64, arm64]
+  - id: "hxtp-cli"
+    binary: "hxtp-cli"
+    main: "./cmd/hxtp-cli/main.go"
+    goos:
+      - "linux"
+      - "darwin"
+      - "windows"
+    goarch:
+      - "amd64"
+      - "arm64"
