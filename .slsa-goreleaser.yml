@@ -2,9 +2,7 @@
 # Single multi-target build — produces all platform binaries in one job.
 # See: https://github.com/slsa-framework/slsa-github-generator/blob/main/internal/builders/go/README.md
 
-version: 2
-
-project_name: hxtp-cli
+version: 1
 
 builds:
   - id: hxtp-cli
