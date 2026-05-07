@@ -98,10 +98,34 @@ func LoginFlow() error {
 		return fmt.Errorf("Failed to save to keychain: %v", err)
 	}
 
-	err = auth.SaveConfig(&auth.Config{
+	// Save initial config
+	cfg := &auth.Config{
 		ApiUrl:    apiUrl,
 		LastLogin: time.Now().Format(time.RFC3339),
+	}
+
+	// ── 3. Auto-Retrieve User Context ────────────
+	err = ui.Pulse("Configuring user profile...", func() error {
+		// Fetch homes to set default space
+		res, pulseErr := hxtpClient.ListHomes()
+		if pulseErr != nil {
+			return nil // Non-fatal if we can't list homes yet
+		}
+
+		homes, ok := res["homes"].([]interface{})
+		if ok && len(homes) > 0 {
+			// If exactly one home, set it as active
+			if len(homes) == 1 {
+				hMap := homes[0].(map[string]interface{})
+				cfg.ActiveSpaceID = hMap["id"].(string)
+			}
+			// If multiple, we could prompt here, but for now we just don't set a default
+			// and let them use 'space use'
+		}
+		return nil
 	})
+
+	err = auth.SaveConfig(cfg)
 	if err != nil {
 		return err
 	}

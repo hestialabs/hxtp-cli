@@ -68,6 +68,10 @@ var deviceCreateCmd = &cobra.Command{
 	Use:   "add",
 	Short: "Connect new hardware to your space",
 	RunE: func(cmd *cobra.Command, args []string) error {
+		_, cfg, _ := auth.RequireAuth()
+		if homeId == "" && cfg != nil && cfg.ActiveSpaceID != "" {
+			homeId = cfg.ActiveSpaceID
+		}
 		return views.DeviceCreateFlow(homeId, deviceType)
 	},
 }

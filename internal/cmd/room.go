@@ -23,13 +23,17 @@ var roomListCmd = &cobra.Command{
 	Aliases: []string{"ls"},
 	Short:   "List rooms in a specific Smart Space",
 	RunE: func(cmd *cobra.Command, args []string) error {
-		if roomHomeId == "" {
-			return fmt.Errorf("Smart Space ID is required. Use --space [id]")
-		}
-
 		token, cfg, err := auth.RequireAuth()
 		if err != nil {
 			return err
+		}
+
+		if roomHomeId == "" && cfg.ActiveSpaceID != "" {
+			roomHomeId = cfg.ActiveSpaceID
+		}
+
+		if roomHomeId == "" {
+			return fmt.Errorf("Smart Space ID is required. Use --space [id] or 'space use [id]'")
 		}
 
 		hxtpClient := client.NewClient(client.ClientConfig{
@@ -63,15 +67,19 @@ var roomAddCmd = &cobra.Command{
 	Short: "Add a new room to a Smart Space",
 	Args:  cobra.ExactArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
-		if roomHomeId == "" {
-			return fmt.Errorf("Smart Space ID is required. Use --space [id]")
-		}
-		name := args[0]
-
 		token, cfg, err := auth.RequireAuth()
 		if err != nil {
 			return err
 		}
+
+		if roomHomeId == "" && cfg.ActiveSpaceID != "" {
+			roomHomeId = cfg.ActiveSpaceID
+		}
+
+		if roomHomeId == "" {
+			return fmt.Errorf("Smart Space ID is required. Use --space [id] or 'space use [id]'")
+		}
+		name := args[0]
 
 		hxtpClient := client.NewClient(client.ClientConfig{
 			BaseURL: cfg.ApiUrl,
@@ -92,5 +100,5 @@ func init() {
 	roomCmd.AddCommand(roomListCmd)
 	roomCmd.AddCommand(roomAddCmd)
 
-	roomCmd.PersistentFlags().StringVarP(&roomHomeId, "space", "s", "", "ID of the target Smart Space")
+	roomCmd.PersistentFlags().StringVarP(&roomHomeId, "space", "s", "", "ID of the target Smart Space (defaults to 'space use' setting)")
 }

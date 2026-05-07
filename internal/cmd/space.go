@@ -56,7 +56,30 @@ var spaceListCmd = &cobra.Command{
 	},
 }
 
+var spaceUseCmd = &cobra.Command{
+	Use:   "use [id]",
+	Short: "Set the default Smart Space for subsequent commands",
+	Args:  cobra.ExactArgs(1),
+	RunE: func(cmd *cobra.Command, args []string) error {
+		_, cfg, err := auth.RequireAuth()
+		if err != nil {
+			return err
+		}
+
+		id := args[0]
+		cfg.ActiveSpaceID = id
+
+		if err := auth.SaveConfig(cfg); err != nil {
+			return err
+		}
+
+		fmt.Printf("✅ Active Smart Space set to: %s\n", id)
+		return nil
+	},
+}
+
 func init() {
 	rootCmd.AddCommand(spaceCmd)
 	spaceCmd.AddCommand(spaceListCmd)
+	spaceCmd.AddCommand(spaceUseCmd)
 }

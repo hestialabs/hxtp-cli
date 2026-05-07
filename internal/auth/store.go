@@ -17,12 +17,13 @@ const (
 )
 
 type Config struct {
-	ApiUrl     string `json:"api_url"`
-	TenantId   string `json:"tenant_id"`
-	ClientId   string `json:"client_id"`
-	DeviceId   string `json:"device_id"`
-	Secret     string `json:"secret"`
-	LastLogin  string `json:"last_login"`
+	ApiUrl        string `json:"api_url"`
+	TenantId      string `json:"tenant_id"`
+	ClientId      string `json:"client_id"`
+	DeviceId      string `json:"device_id"`
+	Secret        string `json:"secret"`
+	LastLogin     string `json:"last_login"`
+	ActiveSpaceID string `json:"active_space_id"`
 }
 
 // GetConfigPath returns the cross-platform path to the config JSON.
