@@ -13,6 +13,8 @@ require (
 	github.com/zalando/go-keyring v0.2.8
 )
 
+replace github.com/hestialabs/hxtp-go => ../../SDK/go
+
 require (
 	github.com/atotto/clipboard v0.1.4 // indirect
 	github.com/aymanbagabas/go-osc52/v2 v2.0.1 // indirect

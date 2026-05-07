@@ -9,16 +9,13 @@ on:
     tags:
       - "v*"
 
-permissions: read-all
+permissions:
+  id-token: write # To sign the provenance.
+  contents: write # To upload assets to release.
+  actions: read   # To read the workflow path.
 
 jobs:
   build:
-    env:
-      GOWORK: off
-    permissions:
-      id-token: write # To sign the provenance.
-      contents: write # To upload assets to release.
-      actions: read   # To read the workflow path.
     strategy:
       fail-fast: false
       matrix:

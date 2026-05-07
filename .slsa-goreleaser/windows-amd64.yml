@@ -1,7 +1,6 @@
 version: 1
 env:
   - CGO_ENABLED=0
-  - GOWORK=off
 goos: windows
 goarch: amd64
 main: ./cmd/hxtp-cli
