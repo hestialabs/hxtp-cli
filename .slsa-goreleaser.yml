@@ -4,10 +4,5 @@ builds:
   - id: "hxtp-cli"
     binary: "hxtp-cli"
     main: "./cmd/hxtp-cli/main.go"
-    goos:
-      - "linux"
-      - "darwin"
-      - "windows"
-    goarch:
-      - "amd64"
-      - "arm64"
+    goos: "linux darwin windows"
+    goarch: "amd64 arm64"
