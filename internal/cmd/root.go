@@ -11,7 +11,7 @@ var transportType string
 
 var rootCmd = &cobra.Command{
 	Use:     "hxtp-cli",
-	Version: "v1.0.1",
+	Version: "v1.0.2",
 	Short:   "HxTP is a secure developer-first CLI",
 	Long:    `The official Hestia Labs Cross-Platform Trust Protocol CLI. Built for developers to add, control, and manage your devices instantly.`,
 }
