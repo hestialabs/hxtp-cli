@@ -11,11 +11,10 @@ on:
 
 permissions: read-all
 
-env:
-  GOWORK: off
-
 jobs:
   build:
+    env:
+      GOWORK: off
     permissions:
       id-token: write # To sign the provenance.
       contents: write # To upload assets to release.
@@ -36,4 +35,3 @@ jobs:
       config-file: .slsa-goreleaser/${{ matrix.os }}-${{ matrix.arch }}.yml
       upload-assets: true
       compile-builder: true
-      go-mod-vendor: false
