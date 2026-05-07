@@ -2,7 +2,6 @@
 
 The official Command Line Interface for the **Hestia Labs Cross-Platform Trust Protocol (HxTP)**. Built for developers to manage smart hardware, secure device handshakes, and interact with the Hestia Cloud ecosystem.
 
-[![SLSA 3](https://slsa.dev/images/badge-level3.svg)](https://slsa.dev)
 [![Go Version](https://img.shields.io/github/go-mod/go-version/hestialabs/hxtp-cli)](https://go.dev)
 
 ## Features
