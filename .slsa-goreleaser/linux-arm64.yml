@@ -1,0 +1,7 @@
+version: 1
+env:
+  - CGO_ENABLED=0
+goos: linux
+goarch: arm64
+main: ./cmd/hxtp-cli/main.go
+binary: hxtp-cli-{{ .Os }}-{{ .Arch }}
