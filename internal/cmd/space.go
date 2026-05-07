@@ -42,14 +42,21 @@ var spaceListCmd = &cobra.Command{
 		}
 
 		w := tabwriter.NewWriter(os.Stdout, 0, 0, 4, ' ', 0)
-		fmt.Fprintln(w, "ID\tNAME\tTIMEZONE")
+		fmt.Fprintln(w, "CURRENT\tID\tNAME\tTIMEZONE")
 		for _, h := range homes {
 			hMap := h.(map[string]interface{})
+			id := hMap["id"].(string)
+			
+			activeMarker := ""
+			if id == cfg.ActiveSpaceID {
+				activeMarker = "*"
+			}
+
 			name, _ := hMap["home_name"].(string)
 			if name == "" {
 				name, _ = hMap["name"].(string)
 			}
-			fmt.Fprintf(w, "%s\t%s\t%s\n", hMap["id"], name, hMap["timezone"])
+			fmt.Fprintf(w, "%s\t%s\t%s\t%s\n", activeMarker, id, name, hMap["timezone"])
 		}
 		w.Flush()
 		return nil

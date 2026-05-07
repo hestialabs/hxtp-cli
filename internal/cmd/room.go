@@ -58,6 +58,8 @@ var roomListCmd = &cobra.Command{
 			fmt.Fprintf(w, "%s\t%s\n", rMap["id"], rMap["name"])
 		}
 		w.Flush()
+		
+		fmt.Printf("\nTotal: %d rooms\n", len(rooms))
 		return nil
 	},
 }
@@ -85,12 +87,18 @@ var roomAddCmd = &cobra.Command{
 			BaseURL: cfg.ApiUrl,
 			Token:   token,
 		})
-		_, err = hxtpClient.CreateRoom(roomHomeId, name)
+		res, err := hxtpClient.CreateRoom(roomHomeId, name)
 		if err != nil {
 			return err
 		}
 
+		roomId := "unknown"
+		if id, ok := res["id"].(string); ok {
+			roomId = id
+		}
+
 		fmt.Printf("✅ Room '%s' successfully added to space.\n", name)
+		fmt.Printf("ID: %s\n", roomId)
 		return nil
 	},
 }
